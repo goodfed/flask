@@ -19,7 +19,13 @@ def render_departure(departure):
     if departure not in data.departures:
         abort(404)
 
-    output = render_template('departure.html', departure=departure, departures=data.departures, tours=data.tours)
+    choosed_tours = []
+    for id, t in data.tours.items():
+        if t['departure'] == departure:
+            t['id'] = id
+            choosed_tours.append(t)
+
+    output = render_template('departure.html', departure=departure, departures=data.departures, tours=choosed_tours)
     return output
 
 @app.route("/tours/<int:id>/")
