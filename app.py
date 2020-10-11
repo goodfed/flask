@@ -4,6 +4,7 @@ import data
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def render_index():
     output = render_template('index.html',
@@ -13,6 +14,7 @@ def render_index():
                              departures=data.departures,
                              tours=data.tours)
     return output
+
 
 @app.route("/departures/<departure>/")
 def render_departure(departure):
@@ -27,6 +29,7 @@ def render_departure(departure):
 
     output = render_template('departure.html', departure=departure, departures=data.departures, tours=choosed_tours)
     return output
+
 
 @app.route("/tours/<int:id>/")
 def render_tour(id):
